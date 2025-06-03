@@ -45,14 +45,7 @@ const Navbar = () => {
 
                
 
-                <li className="font-[500] transition-all duration-150" onClick={() => setNavbarOpen(!navbarOpen)}>
-                   <Link className={`${
-                    path === "/contact" ? "text-white font-semibold" : "text-gray-200"
-                   }`}
-                    to="/contact">
-                        Contact
-                   </Link> 
-                </li>
+                
 
                 <li className="font-[500] transition-all duration-150" onClick={() => setNavbarOpen(!navbarOpen)}>
                    <Link className={`${
