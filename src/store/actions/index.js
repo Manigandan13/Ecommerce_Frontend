@@ -326,7 +326,7 @@ export const submitContact = (formData) => async (dispatch) => {
     try {
         dispatch({ type: 'CONTACT_REQUEST' });
 
-        const response = await api.post('/contact', formData); // Adjust URL if needed
+        const response = await api.post('/public/contact', formData); // Adjust URL if needed
 
         dispatch({
             type: 'CONTACT_SUCCESS',
