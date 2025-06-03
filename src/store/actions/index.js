@@ -160,20 +160,22 @@ export const logOutUser = (navigate) => (dispatch) => {
 };
 
 export const addUpdateUserAddress =
-     (sendData, toast, addressId, setOpenAddressModal) => async (dispatch, getState) => {
-    /*
-    const { user } = getState().auth;
-    await api.post(`/addresses`, sendData, {
-          headers: { Authorization: "Bearer " + user.jwtToken },
-        });
-    */
+    (sendData, toast, addressId, setOpenAddressModal) => async (dispatch, getState) => {
     dispatch({ type:"BUTTON_LOADER" });
+
+    const { user } = getState().auth; //  Ensure this gets your current user's JWT
+
     try {
         if (!addressId) {
-            const { data } = await api.post("/addresses", sendData);
+            const { data } = await api.post("/addresses", sendData, {
+                headers: { Authorization: `Bearer ${user.jwtToken}` } //  Send JWT
+            });
         } else {
-            await api.put(`/addresses/${addressId}`, sendData);
+            await api.put(`/addresses/${addressId}`, sendData, {
+                headers: { Authorization: `Bearer ${user.jwtToken}` } //  Send JWT
+            });
         }
+
         dispatch(getUserAddresses());
         toast.success("Address saved successfully");
         dispatch({ type:"IS_SUCCESS" });
@@ -185,6 +187,7 @@ export const addUpdateUserAddress =
         setOpenAddressModal(false);
     }
 };
+
 
 
 export const deleteUserAddress = 
